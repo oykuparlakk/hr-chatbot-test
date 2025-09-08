@@ -10,16 +10,16 @@ from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, StorageCon
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 # Embedding modeli
-embed_model = HuggingFaceEmbedding(
-    model_name="intfloat/e5-small",   # HF Hub modeli
-    trust_remote_code=True
-)
-
-# embed_model_path = "./models/embeddings/e5-small"
 # embed_model = HuggingFaceEmbedding(
-#     model_name=embed_model_path,
+#     model_name="intfloat/e5-small",   # HF Hub modeli
 #     trust_remote_code=True
 # )
+
+embed_model_path = "./models/embeddings/e5-small"
+embed_model = HuggingFaceEmbedding(
+    model_name=embed_model_path,
+    trust_remote_code=True
+)
 
 
 # Dökümanları oku
