@@ -1,59 +1,63 @@
-############
-
-# pip3 install llama-index
-# pip3 install llama-index-embeddings-huggingface
-# pip install chromadb llama-index sentence-transformers
-
-import chromadb
-from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, StorageContext
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-
-# Embedding modeli
-# embed_model = HuggingFaceEmbedding(
-#     model_name="intfloat/e5-small",   # HF Hub modeli
-#     trust_remote_code=True
-# )
-
-embed_model_path = "./models/embeddings/e5-small"
-embed_model = HuggingFaceEmbedding(
-    model_name=embed_model_path,
-    trust_remote_code=True
-)
+from llama_index.vector_stores.chroma import ChromaVectorStore
+from llama_index.core.node_parser import TokenTextSplitter
+import chromadb
+from dotenv import load_dotenv
+import os
 
 
-# Dökümanları oku
-documents = SimpleDirectoryReader("data").load_data()
+if __name__ == "__main__":
+    # .env dosyasını yükle
+    load_dotenv()
 
-# Chroma istemcisi oluştur
-chroma_client = chromadb.Client()
+    # Parametreleri .env'den oku
+    embed_model_path = os.getenv("EMBEDDING_MODEL", "./models/embeddings/e5-small")
+    collection_name = os.getenv("CHROMA_COLLECTION", "hr_docs")
+    chunk_size = int(os.getenv("CHUNK_SIZE", 500))
+    chunk_overlap = int(os.getenv("CHUNK_OVERLAP", 50))
 
-# Chroma koleksiyonu oluştur
-chroma_collection = chroma_client.get_or_create_collection("hr_docs")
+    print("\nData klasöründen dokümanlar yükleniyor...")
+    documents = SimpleDirectoryReader("data").load_data()
+    print(f"Doküman sayısı: {len(documents)}")
 
-# ChromaVectorStore ile vektör veritabanı oluştur
-vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+    # 1. Embedding modeli
+    print("\n Embedding modeli yükleniyor...")
+    embed_model = HuggingFaceEmbedding(model_name=embed_model_path)
+    print(f" Embedding modeli hazır! ({embed_model_path})")
 
-storage_context = StorageContext.from_defaults(vector_store=vector_store)
+    # 2. ChromaDB client (lokal, dosya tabanlı)
+    print("\n ChromaDB başlatılıyor...")
+    chroma_client = chromadb.PersistentClient(path="./index/chroma")
+
+    # Önce koleksiyon varsa sil sonra sıfırdan oluştur
+    try:
+        chroma_client.delete_collection(collection_name)
+        print(f" Eski '{collection_name}' koleksiyonu silindi.")
+    except Exception:
+        print(f"Önceki '{collection_name}' koleksiyonu bulunamadı, yeni oluşturulacak.")
+
+    collection = chroma_client.get_or_create_collection(collection_name)
+
+    # Vector store ve storage context
+    vector_store = ChromaVectorStore(chroma_collection=collection)
+    storage_context = StorageContext.from_defaults(vector_store=vector_store)
+    print("ChromaDB client hazır!")
+
+    # 3. Chunk splitter 
+    splitter = TokenTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+
+    # 4. Index oluşturma (chunking + embedding + kayıt)
+    print(f"\nIndex oluşturuluyor... (chunk_size={chunk_size}, overlap={chunk_overlap})")
+    index = VectorStoreIndex.from_documents(
+        documents,
+        storage_context=storage_context,
+        embed_model=embed_model,
+        transformations=[splitter]
+    )
+    print("LlamaIndex ile ingestion tamamlandı!")
+
+    print("Toplam kayıt sayısı:", collection.count())
 
 
-# Index oluştur (chunking + embedding) ve ChromaDB’ye bağla
-index = VectorStoreIndex.from_documents(
-    documents,
-    embed_model=embed_model,
-    vector_store=vector_store,
-    storage_context=storage_context
-)
-
-# DB’yi diske kaydet
-vector_store.persist(persist_path="./index/chroma")
-print("Yüklenen koleksiyondaki doküman sayısı:", len(vector_store._collection.get()["ids"]))
-
-print("ChromaDB'ye kaydetme tamamlandı ✅")
-
-# Embedding'lere erişim
-results = chroma_collection.get(include=["documents", "metadatas"])
-for i, chunk_text in enumerate(results["documents"]):
-    print("Chunk:", chunk_text[:200])  # ilk 200 karakter
-    print("Metadata:", results["metadatas"][i])
-    print("------------------")
+    print("Toplam kayıt sayısı:", index)
