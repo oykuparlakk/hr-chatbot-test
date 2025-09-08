@@ -1,0 +1,7 @@
+models/
+index/
+data/
+*.gguf
+*.safetensors
+*.bin
+*.sqlite3
