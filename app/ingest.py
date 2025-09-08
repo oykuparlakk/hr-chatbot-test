@@ -1,58 +1,59 @@
-from pypdf import PdfReader
-import os
-from sentence_transformers import SentenceTransformer
+############
+
+# pip3 install llama-index
+# pip3 install llama-index-embeddings-huggingface
+# pip install chromadb llama-index sentence-transformers
+
 import chromadb
+from llama_index.vector_stores.chroma import ChromaVectorStore
+from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, StorageContext
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
-def load_pdf(file_path):
-	reader = PdfReader(file_path)
-	text = ""
-	for page in reader.pages:
-	    text += page.extract_text() + "\n"
-	return text
+# Embedding modeli
+embed_model = HuggingFaceEmbedding(
+    model_name="intfloat/e5-small",   # HF Hub modeli
+    trust_remote_code=True
+)
 
-def chunk_text(text, chunk_size=500, overlap=50):
-  chunks = []
-  start = 0
-  while start < len(text):
-      end = start + chunk_size
-      chunk = text[start:end]
-      chunks.append(chunk)
-      start += chunk_size - overlap
-  return chunks
+# embed_model_path = "./models/embeddings/e5-small"
+# embed_model = HuggingFaceEmbedding(
+#     model_name=embed_model_path,
+#     trust_remote_code=True
+# )
 
-if __name__ == "__main__":
-  pdf_folder = "data"
-  pdf_files = [f for f in os.listdir(pdf_folder) if f.endswith(".pdf")]
 
-  # Embedding Modeli ve ChromaDB client sadece bir kez yükleniyor
-  embed_model_path = "./models/embeddings/e5-small"
-  model = SentenceTransformer(embed_model_path)
-  client = chromadb.PersistentClient(path="./index/chroma")
-  collection = client.get_or_create_collection(name="hr_docs")
+# Dökümanları oku
+documents = SimpleDirectoryReader("data").load_data()
 
-  for pdf_file in pdf_files:
-      file_path = os.path.join(pdf_folder, pdf_file)
-      print(f"\nPDF yükleniyor: {pdf_file}")
-      text = load_pdf(file_path)
-      print("Karakter sayısı:", len(text))
+# Chroma istemcisi oluştur
+chroma_client = chromadb.Client()
 
-      chunks = chunk_text(text)
-      print("Chunk sayısı:", len(chunks))
+# Chroma koleksiyonu oluştur
+chroma_collection = chroma_client.get_or_create_collection("hr_docs")
 
-      embeddings = model.encode(chunks)
-      print("Embedding tamamlandı!")
-      print("Vektör boyutu:", embeddings.shape)
+# ChromaVectorStore ile vektör veritabanı oluştur
+vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 
-      # Her chunk için ID üretimi, dosya adını da ekliyoruz
-      base_name = os.path.splitext(pdf_file)[0]
-      ids = [f"{base_name}_chunk_{i}" for i in range(len(chunks))]
+storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-      collection.add(
-          documents=chunks,
-          embeddings=embeddings.tolist(),
-          ids=ids
-      )
 
-      print(f"{pdf_file} ChromaDB'ye kaydedildi!")
+# Index oluştur (chunking + embedding) ve ChromaDB’ye bağla
+index = VectorStoreIndex.from_documents(
+    documents,
+    embed_model=embed_model,
+    vector_store=vector_store,
+    storage_context=storage_context
+)
 
-  print("\nToplam kayıt sayısı:", collection.count())
+# DB’yi diske kaydet
+vector_store.persist(persist_path="./index/chroma")
+print("Yüklenen koleksiyondaki doküman sayısı:", len(vector_store._collection.get()["ids"]))
+
+print("ChromaDB'ye kaydetme tamamlandı ✅")
+
+# Embedding'lere erişim
+results = chroma_collection.get(include=["documents", "metadatas"])
+for i, chunk_text in enumerate(results["documents"]):
+    print("Chunk:", chunk_text[:200])  # ilk 200 karakter
+    print("Metadata:", results["metadatas"][i])
+    print("------------------")
