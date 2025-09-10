@@ -38,3 +38,6 @@ UI → app/ui.py
 pip3 install pypdf llama-index chromadb sentence-transformers FlagEmbedding llama-cpp-python streamlit
 
 source venv/bin/activate
+
+llmdeki from llama_index.llms.llama_cpp import LlamaCPP hatası bu komutla çözüldü ->  pip install llama-index-llms-llama-cpp
+
