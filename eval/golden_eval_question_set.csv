@@ -1,0 +1,55 @@
+﻿Question,expected_doc,expected_section,answerable,char_start,char_end
+Maaş bordroları hangi tarihte iletiliyor?,1. BORDRO ÜCRETLENDİRME POLİTİKASI.pdf,6. BORDRO ÖDEME TARİHLERİ,True,1993,2087
+Fazla mesai ücretleri bordroya nasıl yansıyor?,1. BORDRO ÜCRETLENDİRME POLİTİKASI.pdf,2.3 Fazla Mesai,True,813,1056
+Net maaş ile brüt maaş arasındaki fark nasıl hesaplanıyor?,1. BORDRO ÜCRETLENDİRME POLİTİKASI.pdf,5. KESİNTİLER VE VERGİLER,True,1684,1989
+Bordroda yer alan kesintiler nereden görülebilir?,1. BORDRO ÜCRETLENDİRME POLİTİKASI.pdf,5. KESİNTİLER VE VERGİLER,True,1684,1989
+Bordro üzerinden öğle yemeği menüsünü görebilir miyim?,1. BORDRO ÜCRETLENDİRME POLİTİKASI.pdf,,False,0,0
+Bordromda neden kedimin adı yazmıyor?,1. BORDRO ÜCRETLENDİRME POLİTİKASI.pdf,,False,0,0
+Yıllık izin talebi için hangi form doldurulmalı?,2. ÇALIŞAN İZİN TÜRLERİ VE PROSEDÜRÜ.pdf,1.2 İzin Kullanım Kuralları,True,366,663
+Raporlu izinlerde doktor raporu nasıl iletiliyor?,2. ÇALIŞAN İZİN TÜRLERİ VE PROSEDÜRÜ.pdf,2.1 Kısa Süreli Hastalık,True,715,910
+Ücretsiz izin prosedürü nedir?,2. ÇALIŞAN İZİN TÜRLERİ VE PROSEDÜRÜ.pdf,,False,0,0
+Acil izin için kime bilgi vermem gerekiyor?,2. ÇALIŞAN İZİN TÜRLERİ VE PROSEDÜRÜ.pdf,5.2 Başvuru Süreleri,True,2110,2223
+İzin alırsam tatilde bana şirket araba verir mi?,2. ÇALIŞAN İZİN TÜRLERİ VE PROSEDÜRÜ.pdf,,False,0,0
+İzin prosedüründe Mars’a gitmek için kural var mı?,2. ÇALIŞAN İZİN TÜRLERİ VE PROSEDÜRÜ.pdf,,False,0,0
+Fazla mesai onayı kimden alınmalı?,3. FAZLA MESAİ VE ESNEK ÇALIŞMA POLİTİKASI.pdf,"2.1 Hafta İçi Fazla Mesai, 5.1 Başvuru Süreci",True,2378,2596
+Esnek çalışma saatleri hangi günlerde geçerlidir?,3. FAZLA MESAİ VE ESNEK ÇALIŞMA POLİTİKASI.pdf,1.1 Standart Mesai,True,245,410
+Fazla mesai ücreti ne zaman ödenir?,3. FAZLA MESAİ VE ESNEK ÇALIŞMA POLİTİKASI.pdf,5.3 Fazla Mesai Ödemesi,True,2697,2795
+Uzaktan çalışırken fazla mesai nasıl hesaplanır?,3. FAZLA MESAİ VE ESNEK ÇALIŞMA POLİTİKASI.pdf,,False,0,0
+Fazla mesai yaparsam süper kahraman olur muyum?,3. FAZLA MESAİ VE ESNEK ÇALIŞMA POLİTİKASI.pdf,,False,0,0
+Esnek çalışmada pijamayla toplantıya katılmak zorunlu mu?,3. FAZLA MESAİ VE ESNEK ÇALIŞMA POLİTİKASI.pdf,,False,0,0
+Çalışan şikayetleri hangi platformdan iletiliyor?,4. ŞİKAYET YÖNETİMİ POLİTİKASI.pdf,3. ŞİKAYET KANALLARI,True,964,1279
+Şikayet başvurularına cevap süresi nedir?,4. ŞİKAYET YÖNETİMİ POLİTİKASI.pdf,4. DEĞERLENDİRME SÜRECİ,True,1298,1404
+Anonim şikayet yapabilir miyim?,4. ŞİKAYET YÖNETİMİ POLİTİKASI.pdf,3.1 Doğrudan Başvuru,True,987,1099
+Şikayetim haksız bulunursa bana dönüş yapılıyor mu?,4. ŞİKAYET YÖNETİMİ POLİTİKASI.pdf,6.1 Kararlar,True,1836,2026
+Şikayetimi CEO’nun evine gidip iletebilir miyim?,4. ŞİKAYET YÖNETİMİ POLİTİKASI.pdf,,False,0,0
+Şikayet sisteminde pizza siparişi verebilir miyim?,4. ŞİKAYET YÖNETİMİ POLİTİKASI.pdf,,False,0,0
+Oryantasyon süresi ne kadar?,5. İŞE GİRİŞ KILAVUZU.pdf,6.1 Oryantasyon (İlk Hafta),True,1380,1526
+İşe giriş belgelerini hangi birime teslim etmeliyim?,5. İŞE GİRİŞ KILAVUZU.pdf,2.1 Giriş Saati,True,237,429
+Deneme süresi kaç ay?,5. İŞE GİRİŞ KILAVUZU.pdf,9. ÖNEMLİ NOTLAR,True,2038,2118
+İşe girişte verilen ekipmanları kim teslim ediyor?,5. İŞE GİRİŞ KILAVUZU.pdf,5.1 Bilgi İşlem,True,1190,1324
+İşe girişte bana altın saat hediye ediliyor mu?,5. İŞE GİRİŞ KILAVUZU.pdf,,False,0,0
+İlk gün şirkete atla gelebilir miyim?,5. İŞE GİRİŞ KILAVUZU.pdf,,False,0,0
+İstifa dilekçesi kime teslim edilmeli?,6. İŞTEN AYRILMA SÜRECİ.pdf,,False,0,0
+İhbar süresi ne kadardır?,6. İŞTEN AYRILMA SÜRECİ.pdf,3. İHBAR SÜRELERİ,True,663,1024
+Kullanılmayan izinlerin ödemesi nasıl yapılır?,6. İŞTEN AYRILMA SÜRECİ.pdf,"6.1 Ödenecek Tutarlar, 10. Kullanılmayan Yıllık izin",True,2390,2969
+Şirket ekipmanlarını iade süreci nasıldır?,6. İŞTEN AYRILMA SÜRECİ.pdf,4. TESLİM-TESLÜM SÜRECİ,True,1047,1523
+İşten ayrılırken şirket arabasını bende bırakabilir miyim?,6. İŞTEN AYRILMA SÜRECİ.pdf,,False,0,0
+Vedalaşmadan çıkarsam tazminatım yanar mı?,6. İŞTEN AYRILMA SÜRECİ.pdf,,False,0,0
+Performans görüşmeleri hangi dönemlerde yapılıyor?,7. PERFORMANS DEĞERLENDİRME SÜRECİ.pdf,2. DEĞERLENDİRME DÖNEMLERİ,True,272,733
+Değerlendirme kriterleri nelerdir?,7. PERFORMANS DEĞERLENDİRME SÜRECİ.pdf,3. DEĞERLENDİRME KRİTERLERİ,True,752,1523
+Düşük performans puanı bana nasıl bildirilir?,7. PERFORMANS DEĞERLENDİRME SÜRECİ.pdf,6.1 Bireysel Gelişim Planları (BGP),True,3550,4522
+Yöneticimle geri bildirim görüşmesi yapabilir miyim?,7. PERFORMANS DEĞERLENDİRME SÜRECİ.pdf,Genel,True,421,864
+Performans değerlendirmesinde karaoke yapmak zorunda mıyım?,7. PERFORMANS DEĞERLENDİRME SÜRECİ.pdf,,False,0,0
+Yüksek performans puanı alanlara bedava tatil veriliyor mu?,7. PERFORMANS DEĞERLENDİRME SÜRECİ.pdf,,False,0,0
+Yemek kartı limiti ne kadar?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,4.2 Yemek Kartı,True,1877,1989
+Sağlık sigortası kapsamında hangi hastaneler var?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,,False,0,0
+Ulaşım desteği sağlanıyor mu?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,3. ULAŞIM DESTEKLERİ,True,1047,1813
+Eğitim desteği almak için nasıl başvurabilirim?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,9. BAŞVURU SÜREÇLERİ,True,3878,4004
+Sosyal yardım olarak uçan araba veriliyor mu?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,,False,0,0
+Yan haklar kapsamında uzaya çıkış bileti alabilir miyim?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,,False,0,0
+Yıllık izin hakkı işe girişten ne kadar süre sonra başlar?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,2.1 Yasal Süreler,True,0,0
+Yıllık izin kaç parçaya bölünebilir?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,4. İZİN KULLANIM KURALLARI,True,1817,2315
+Kullanılmayan yıllık izinler devredilir mi?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,5.1 Devir Kuralları,True,2470,2715
+Yıllık izin tarihleri kim tarafından onaylanır?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,3.1 Başvuru Süreci,True,1391,1569
+Yıllık izin sırasında yerime robot çalışabilir mi?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,,False,0,0
+Yıllık izin alırsam patronum benimle tatile gelir mi?,8. YAN HAKLAR VE SOSYAL YARDIMLAR KILAVUZU.pdf,,False,0,0

@@ -18,7 +18,7 @@ def rag_pipeline(query: str, stream: bool = True):
     """Hybrid retrieval + reranker + LLM cevabı döndürür."""
 
     # --- Retrieval ---
-    dense_retriever = get_dense_retriever()
+    dense_retriever = get_dense_retriever(top_k = TOP_K)
 
     # BM25 retriever için dokümanları yükle
     documents = SimpleDirectoryReader("data").load_data()
