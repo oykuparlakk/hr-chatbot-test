@@ -32,18 +32,30 @@ Bu proje, **dokümanlardan bilgi alıp** kullanıcı sorularına cevap veren bir
 ## ⚙️ Kurulum
 
 1. Gerekli paketleri yükleyin
+
+
+   
    ``` pip3 install llama-index chromadb FlagEmbedding llama-cpp-python streamlit ```
 
 ## 🚀 Çalıştırma
+
+
   ``` streamlit run app/ui.py ```
 
 ## 🛠️ Hatalar ve Çözümleri
 
 1. from llama_index.llms.llama_cpp import LlamaCPP hatası:
+
+
+
     ``` pip install llama-index-llms-llama-cpp  ```
 
-2. ModuleNotFoundError: No module named 'llama_index.retrievers':
+3. ModuleNotFoundError: No module named 'llama_index.retrievers':
+
+
     ``` pip3 install llama-index-retrievers-bm25  ```
 
-3. ModuleNotFoundError: No module named 'llama_index.postprocessor':
+4. ModuleNotFoundError: No module named 'llama_index.postprocessor':
+
+
     ``` pip3 install llama-index-postprocessor-flag-embedding-reranker ```
