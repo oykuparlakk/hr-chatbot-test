@@ -1,43 +1,49 @@
-hr-chatbot-test/models/embeddings/e5-small/ -> Embedding modeli dokümanı ve soruyu sayıya çeviren motor.
-hr-chatbot-test/models/embeddings/bge-reranker-base/ -> Reranker, embedding’den gelen sonuçları yeniden sıralar, en alakalıyı seçer.
+# HR-Chatbot-Test
 
+RAG (Retrieval-Augmented Generation) tabanlı basit İnsan Kaynakları Chatbot projesi.
 
+---
 
-#Ingestion (hazırlık aşaması)
+## 📖 Proje Hakkında
 
-Dokümanları alıyoruz (data/).
+Bu proje, **dokümanlardan bilgi alıp** kullanıcı sorularına cevap veren bir chatbot geliştirmek için hazırlandı.  
+Çalışma adımları:
 
-Parçalara bölüyoruz (chunking).
+1. **Ingestion (Hazırlık)** → Dokümanları alır, parçalara böler, embedding’e çevirir ve ChromaDB’ye kaydeder.  
+2. **Retrieval (Sorgu)** → Kullanıcı sorusunu embedding’e çevirir, Vector DB’den en yakın parçaları bulur, reranker ile sıralar.  
+3. **LLM + RAG (Cevaplama)** → En iyi parçaları LLM’e verir ve anlamlı yanıt üretir.  
+4. **UI** → Streamlit ile web arayüzünden soru-cevap yapılabilir.
 
-Embedding modelleriyle sayılara çeviriyoruz.
+---
 
-Çıkan embedding’leri ChromaDB’ye kaydediyoruz (index/).
-Bu kısım → app/ingest.py
+## 📂 Dosya Yapısı
 
-#Retrieval (sorgu aşaması)
+- `models/embeddings/e5-small/` → Embedding modeli (doküman ve soruları sayıya çevirir)  
+- `models/embeddings/bge-reranker-base/` → Reranker modeli (embedding sonuçlarını yeniden sıralar)  
+- `data/` → Kaynak dokümanlar  
+- `index/` → ChromaDB veritabanı  
+- `app/ingest.py` → Ingestion işlemleri  
+- `app/retriever.py` → Retrieval & Reranker işlemleri  
+- `app/llm.py` + `app/rag.py` → LLM çağrısı ve RAG cevabı  
+- `app/ui.py` → Streamlit tabanlı arayüz
 
-Kullanıcı bir soru soruyor.
+---
 
-Soruyu embedding’e çeviriyoruz.
+## ⚙️ Kurulum
 
-Vector DB’den en yakın parçaları buluyoruz.
+1. Gerekli paketleri yükleyin
+   ``` pip3 install llama-index chromadb FlagEmbedding llama-cpp-python streamlit ```
 
-#Reranker varsa sıralıyoruz.
-Bu kısım → app/retriever.py
+## 🚀 Çalıştırma
+  ``` streamlit run app/ui.py ```
 
-#LLM + RAG (cevaplama aşaması)
+## 🛠️ Hatalar ve Çözümleri
 
-En iyi parçaları LLM’e veriyoruz.
+1. from llama_index.llms.llama_cpp import LlamaCPP hatası:
+    ``` pip install llama-index-llms-llama-cpp  ```
 
-LLM parçaları kullanarak düzgün bir cümle döndürüyor.
-Bu kısım → app/llm.py + app/rag.py
+2. ModuleNotFoundError: No module named 'llama_index.retrievers':
+    ``` pip3 install llama-index-retrievers-bm25  ```
 
-UI → app/ui.py
-
-
-pip3 install pypdf llama-index chromadb sentence-transformers FlagEmbedding llama-cpp-python streamlit
-
-source venv/bin/activate
-
-llmdeki from llama_index.llms.llama_cpp import LlamaCPP hatası bu komutla çözüldü ->  pip install llama-index-llms-llama-cpp
-
+3. ModuleNotFoundError: No module named 'llama_index.postprocessor':
+    ``` pip3 install llama-index-postprocessor-flag-embedding-reranker ```
