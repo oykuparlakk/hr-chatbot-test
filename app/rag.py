@@ -30,7 +30,13 @@ def rag_pipeline(query: str, stream: bool = True):
     # --- Reranker ---
     reranker = FlagEmbeddingReranker(model=RERANKER_MODEL, top_n=TOP_K)
     hybrid_nodes = [
-        NodeWithScore(node=TextNode(text=item["text"], metadata={"source": item["source"]}), score=item["score"])
+        NodeWithScore(
+            node=TextNode(
+                text=item["text"],
+                metadata={"source": item.get("source", "data")}
+            ),
+            score=item["score"]
+        )
         for item in hybrid_results
     ]
     reranked = reranker.postprocess_nodes(hybrid_nodes, query_str=query)
@@ -40,7 +46,10 @@ def rag_pipeline(query: str, stream: bool = True):
 
     # Reranked sonuçları generate_answer'e uygun hale getir
     sources_for_llm = [
-        {"text": r.node.get_content(), "source": r.node.metadata.get("source", "unknown")}
+        {
+            "text": r.node.get_content(),
+            "source": r.node.metadata.get("source", "data")
+        }
         for r in reranked
     ]
 

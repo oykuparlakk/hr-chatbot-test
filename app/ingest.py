@@ -19,8 +19,12 @@ if __name__ == "__main__":
 
     print("\nData klasöründen dokümanlar yükleniyor...")
     documents = SimpleDirectoryReader("data").load_data()
-    print(f"Doküman sayısı: {len(documents)}")
-
+    for d in documents:
+      if "source" not in d.metadata:
+        # Eğer SimpleDirectoryReader "file_name" vermediyse fallback olarak basename
+        file_name = d.metadata.get("file_name") or os.path.basename(d.doc_id)
+        d.metadata["source"] = file_name
+    print(f" Doküman sayısı: {len(documents)}")
     # 1. Embedding modeli
     print("\n Embedding modeli yükleniyor...")
     embed_model = HuggingFaceEmbedding(model_name=embed_model_path)

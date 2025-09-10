@@ -54,7 +54,7 @@ def hybrid_retrieve(dense_retriever, bm25_retriever, query, top_k, rrf_k=rrf_k):
     def add_results(results, weight=1.0):
         for rank, r in enumerate(results):
             text = r.node.get_content()
-            meta = r.node.metadata.get("file_name", "unknown")  # kaynak dosya
+            meta = r.node.metadata.get("file_name", "")  # kaynak dosya
             key = (text, meta)
             scores[key] = scores.get(key, 0) + weight * (1 / (rrf_k + rank + 1))
 
